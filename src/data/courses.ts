@@ -29,7 +29,7 @@ export interface Lesson {
   duration: number; // minutes
   status: LessonStatus;
   theory: string[];
-  formulas?: { label: string; latex: string }[];
+  formulas?: { label: string; latex: string; vars?: { symbol: string; desc: string }[] }[];
   termEn?: { fa: string; en: string }[];
   example?: { title: string; body: string; steps?: string[] };
   quiz: QuizQuestion[];
@@ -107,15 +107,15 @@ export const courses: Course[] = [
             formulas: [
               {
                 label: "۱. فرمول بازده کل دارایی (Total Return)",
-                latex: "R_t = \\frac{P_t - P_{t-1} + D_t}{P_{t-1}} = \\frac{P_t - P_{t-1}}{P_{t-1}} + \\frac{D_t}{P_{t-1}}"
+                latex: "R_t = \\frac{P_t - P_{t-1} + D_t}{P_{t-1}}"
               },
               {
                 label: "۲. بازده دوره نگهداری چنددوره‌ای (Holding Period Return)",
-                latex: "1 + HPR = \\prod_{t=1}^{T} (1 + R_t) = (1 + R_1)(1 + R_2)\\dots(1 + R_T)"
+                latex: "1 + HPR = \\prod_{t=1}^{T} (1 + R_t)"
               },
               {
                 label: "۳. میانگین هندسی (نرخ رشد مرکب سالانه)",
-                latex: "R_G = \\left[ \\prod_{t=1}^{T} (1 + R_t) \\right]^{1/T} - 1 = \\sqrt[T]{(1 + R_1)(1 + R_2)\\dots(1 + R_T)} - 1"
+                latex: "R_G = \\left[ \\prod_{t=1}^{T} (1 + R_t) \\right]^{1/T} - 1"
               },
               {
                 label: "۴. سالانه‌سازی بازده (Annualized Return)",
@@ -127,7 +127,7 @@ export const courses: Course[] = [
               },
               {
                 label: "۶. رابطه دقیق فیشر (بازده حقیقی)",
-                latex: "1 + R_{\\text{real}} = \\frac{1 + R_{\\text{nominal}}}{1 + \\pi} \\implies R_{\\text{real}} = \\frac{1 + R_{\\text{nominal}}}{1 + \\pi} - 1"
+                latex: "R_{\\text{real}} = \\frac{1 + R_{\\text{nominal}}}{1 + \\pi} - 1"
               },
               {
                 label: "۷. بازده پس از کسر مالیات (After-Tax Return)",
