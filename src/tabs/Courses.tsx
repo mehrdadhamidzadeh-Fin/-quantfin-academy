@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
-import { courses, categoryLabels, CourseCategory, Lesson, Course } from '../data/courses';
+import React, { useState, useEffect } from 'react';
+import { courses, categoryLabels, CourseCategory, Lesson, Course, allLessons } from '../data/courses';
 import { MathBlock } from '../components/Math';
 import { AITutor } from '../components/AITutor';
 
-export const Courses: React.FC = () => {
+interface CoursesProps {
+  onUpgradeClick?: () => void;
+  initialLessonId?: string | null;
+}
+
+export const Courses: React.FC<CoursesProps> = ({ onUpgradeClick, initialLessonId }) => {
   const [selectedCategory, setSelectedCategory] = useState<CourseCategory | "ALL">("ALL");
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    if (initialLessonId) {
+      const target = allLessons.find(l => l.id === initialLessonId);
+      if (target) {
+        const parentCourse = courses.find(c => c.id === target._courseId);
+        if (parentCourse) {
+          setActiveCourse(parentCourse);
+          setActiveLesson(target);
+        }
+      }
+    }
+  }, [initialLessonId]);
 
   const filteredCourses = selectedCategory === "ALL" 
     ? courses 
@@ -243,6 +261,10 @@ export const Courses: React.FC = () => {
                       <button
                         key={lesson.id}
                         onClick={() => {
+                          if (lesson.status === "locked" && onUpgradeClick) {
+                            onUpgradeClick();
+                            return;
+                          }
                           setActiveCourse(course);
                           setActiveLesson(lesson);
                         }}
