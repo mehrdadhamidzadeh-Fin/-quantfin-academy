@@ -123,39 +123,39 @@ export const courses: Course[] = [
               },
               {
                 label: "۴. سالانه‌سازی بازده (Annualized Return)",
-                latex: "R_{\\text{annualized}} = (1 + HPR)^{\\frac{365}{\\text{Days}}} - 1",
+                latex: "R_{ann} = (1 + HPR)^{\\frac{365}{Days}} - 1",
                 vars: [
-                  { symbol: "R_{\\text{annualized}}", desc: "نرخ بازده سالانه‌شده" },
+                  { symbol: "R_{ann}", desc: "نرخ بازده سالانه‌شده" },
                   { symbol: "HPR", desc: "بازده دوره نگهداری" },
                   { symbol: "Days", desc: "تعداد روزهای دوره سرمایه‌گذاری" }
                 ]
               },
               {
                 label: "۵. بازده مرکب پیوسته (Continuously Compounded)",
-                latex: "r_{\\text{cont}} = \\ln(1 + HPR) = \\ln\\left(\\frac{P_T}{P_0}\\right)",
+                latex: "r_{cont} = \\ln(1 + HPR) = \\ln\\left(\\frac{P_T}{P_0}\\right)",
                 vars: [
-                  { symbol: "r_{\\text{cont}}", desc: "نرخ بازده مرکب پیوسته" },
+                  { symbol: "r_{cont}", desc: "نرخ بازده مرکب پیوسته" },
                   { symbol: "P_0", desc: "قیمت اولیه دارایی" },
                   { symbol: "P_T", desc: "قیمت نهایی دارایی در زمان T" }
                 ]
               },
               {
                 label: "۶. رابطه دقیق فیشر (بازده حقیقی)",
-                latex: "R_{\\text{real}} = \\frac{1 + R_{\\text{nominal}}}{1 + \\pi} - 1",
+                latex: "R_{real} = \\frac{1 + R_{nom}}{1 + \\pi} - 1",
                 vars: [
-                  { symbol: "R_{\\text{real}}", desc: "نرخ بازده حقیقی (تنظیم‌شده با تورم)" },
-                  { symbol: "R_{\\text{nominal}}", desc: "نرخ بازده اسمی" },
+                  { symbol: "R_{real}", desc: "نرخ بازده حقیقی (تنظیم‌شده با تورم)" },
+                  { symbol: "R_{nom}", desc: "نرخ بازده اسمی" },
                   { symbol: "\\pi", desc: "نرخ تورم دوره" }
                 ]
               },
               {
                 label: "۷. بازده پس از کسر مالیات (After-Tax Return)",
-                latex: "R_{\\text{after-tax}} = R_{\\text{price}}(1 - t_{\\text{cg}}) + R_{\\text{income}}(1 - t_{\\text{div}})",
+                latex: "R_{after} = R_{price}(1 - t_{cg}) + R_{income}(1 - t_{div})",
                 vars: [
-                  { symbol: "R_{\\text{price}}", desc: "بازده قیمتی (سود سرمایه)" },
-                  { symbol: "t_{\\text{cg}}", desc: "نرخ مالیات بر عایدی سرمایه (Capital Gains Tax Rate)" },
-                  { symbol: "R_{\\text{income}}", desc: "بازده نقدی / سود تقسیمی" },
-                  { symbol: "t_{\\text{div}}", desc: "نرخ مالیات بر سود تقسیمی (Dividend Tax Rate)" }
+                  { symbol: "R_{price}", desc: "بازده قیمتی (سود سرمایه)" },
+                  { symbol: "t_{cg}", desc: "نرخ مالیات بر عایدی سرمایه" },
+                  { symbol: "R_{income}", desc: "بازده نقدی / سود تقسیمی" },
+                  { symbol: "t_{div}", desc: "نرخ مالیات بر سود تقسیمی" }
                 ]
               },
               {
@@ -165,27 +165,121 @@ export const courses: Course[] = [
                   { symbol: "R_E", desc: "بازده حقوق صاحبان سهام (Equity Return)" },
                   { symbol: "V_P", desc: "ارزش کل سبد دارایی یا پورتفو" },
                   { symbol: "R_P", desc: "بازده کل سبد دارایی" },
-                  { symbol: "V_B", desc: "ارزش وجوه استقراضی (Debt/Borrowed Amount)" },
+                  { symbol: "V_B", desc: "ارزش وجوه استقراضی" },
                   { symbol: "r_B", desc: "نرخ بهره استقراض" },
-                  { symbol: "V_E", desc: "ارزش حقوق صاحبان سهام (آورده شخصی سرمایه‌گذار)" }
+                  { symbol: "V_E", desc: "ارزش حقوق صاحبان سهام (آورده شخصی)" }
                 ]
               }
             ],
             example: {
-              title: "مجموعه مثال‌های جامع تحلیل بازده",
-              body: "سناریوهای کلیدی مالی به صورت گام‌به‌گام:",
+              title: "مجموعه مثال‌ها و سناریوهای کاربردی تحلیل بازده",
+              body: "برای تسلط کامل بر مفاهیم آزمون CFA، سناریوهای کلیدی زیر را بررسی کنید:",
               steps: [
-                "\\text{Scenario 1 (Total Return):} \\quad P_0 = 60\\$, \\ P_1 = 72\\$, \\ D_1 = 3\\$ \\implies R = \\frac{72 - 60 + 3}{60} = +25.0\\%",
-                "\\text{Scenario 2 (Fisher Inflation):} \\quad R_{\\text{nom}} = 12\\%, \\ \\pi = 4\\% \\implies R_{\\text{real}} = \\frac{1.12}{1.04} - 1 \\approx +7.69\\%"
+                "\\text{سناریوی ۱ (بازده کل):} \\quad P_0 = 60\\$, \\ P_1 = 72\\$, \\ D_1 = 3\\$ \\implies R = \\frac{72 - 60 + 3}{60} = +25.0\\%",
+                "\\text{سناریوی ۲ (مقایسه میانگین):} \\quad R_1 = +100\\%, \\ R_2 = -50\\% \\implies \\bar{R}_A = +25\\%, \\ R_G = 0\\%",
+                "\\text{سناریوی ۳ (رابطه فیشر):} \\quad R_{nom} = 12\\%, \\ \\pi = 4\\% \\implies R_{real} = \\frac{1.12}{1.04} - 1 \\approx +7.69\\%"
               ]
             },
             quiz: [
               {
                 id: "q-ret-cfa-1",
-                question: "سرمایه‌گذاری سهامی را به قیمت ۵۰ دلار خریداری کرده و در پایان سال به قیمت ۵۵ دلار می‌فروشد، در حالی که در طول سال ۲ دلار سود تقسیمی نقدی دریافت کرده است. بازده کل چقدر است؟",
-                options: ["۱۰.۰ درصد", "۱۴.۰ درصد", "۴.۰ درصد"],
+                question: "سرمایه‌گذاری سهامی را به قیمت ۵۰ دلار خریداری کرده و در پایان سال به قیمت ۵۵ دلار می‌فروشد، در حالی که در طول سال ۲ دلار سود تقسیمی نقدی دریافت کرده است. بازده کل (Total Return) این سرمایه‌گذاری چقدر است؟",
+                questionEn: "An investor buys a stock for $50 and sells it for $55 after one year, receiving a $2 cash dividend. What is the total return?",
+                options: [
+                  "۱۰.۰ درصد",
+                  "۱۴.۰ درصد",
+                  "۴.۰ درصد",
+                  "۱۸.۰ درصد"
+                ],
                 correctIndex: 1,
-                explanation: "بازده قیمتی (55-50)/50 = 10% و بازده تقسیمی 2/50 = 4% که مجموعاً 14% می‌شود."
+                explanation: "بازده قیمتی = (55 - 50) / 50 = 10% | بازده تقسیمی = 2 / 50 = 4% | بازده کل = 10% + 4% = 14%."
+              },
+              {
+                id: "q-ret-cfa-2",
+                question: "اگر بازده سالانه یک صندوق در دو سال پیاپی به ترتیب ۱۰۰٪+ و ۵۰٪- باشد، تفاوت اصلی میانگین حسابی و میانگین هندسی آن چیست؟",
+                questionEn: "If returns are +100% and -50%, what is the key difference between arithmetic and geometric mean?",
+                options: [
+                  "میانگین حسابی ۲۵٪ و میانگین هندسی ۰٪ است.",
+                  "هر دو میانگین دقیقاً برابر با ۲۵٪ خواهند بود.",
+                  "میانگین هندسی بزرگتر از میانگین حسابی است.",
+                  "میانگین حسابی منفی و میانگین هندسی مثبت است."
+                ],
+                correctIndex: 0,
+                explanation: "میانگین حسابی برابر (100% - 50%)/2 = 25% است، اما میانگین هندسی حاصل‌ضرب (2)*(0.5) زیر ریشه دوم منهای یک است که برابر با 0% می‌شود."
+              },
+              {
+                id: "q-ret-cfa-3",
+                question: "اگر بازده اسمی یک سرمایه‌گذاری ۱۲٪ و نرخ تورم سالانه ۴٪ باشد، بازده واقعی (Real Return) بر اساس معادله دقیق فیشر چقدر است؟",
+                questionEn: "If the nominal return is 12% and inflation is 4%, what is the exact real return using Fisher relation?",
+                options: [
+                  "۸.۰۰ درصد",
+                  "۷.۶۹ درصد",
+                  "۸.۳۳ درصد",
+                  "۶.۵۰ درصد"
+                ],
+                correctIndex: 1,
+                explanation: "فرمول فیشر: (1 + 0.12) / (1 + 0.04) - 1 = 1.12 / 1.04 - 1 ≈ 7.69%."
+              },
+              {
+                id: "q-ret-cfa-4",
+                question: "مهم‌ترین ویژگی بازده مرکب پیوسته (Continuously Compounded Return) در مدل‌سازی مالی چیست؟",
+                questionEn: "What is the primary feature of continuously compounded return in financial modeling?",
+                options: [
+                  "دارای خاصیت جمع‌پذیری زمانی (Time-Additivity) است.",
+                  "همیشه از بازده ساده بزرگتر است.",
+                  "نیازی به قیمت‌های ابتدایی و انتهایی ندارد.",
+                  "فقط برای اوراق با درآمد ثابت کاربرد دارد."
+                ],
+                correctIndex: 0,
+                explanation: "بازده مرکب پیوسته (لگاریتمی) به دلیل خاصیت لگاریتم، در طول زمان جمع‌پذیر است و در مدل‌های قیمت‌گذاری مشتقات کاربرد کلیدی دارد."
+              },
+              {
+                id: "q-ret-cfa-5",
+                question: "اگر سرمایه‌گذاری با استفاده از اهرم مالی (Leverage) پورتفویی با بازده ۱۵٪ تشکیل دهد و نرخ بهره استقراض ۵٪ باشد، با افزایش نسبت بدهی چه اتفاقی برای بازده حقوق صاحبان سهام می‌افتد؟",
+                questionEn: "When using leverage with a portfolio return above borrowing cost, what happens to equity return as leverage increases?",
+                options: [
+                  "بازده حقوق صاحبان سهام (ROE) افزایش می‌یابد.",
+                  "بازده حقوق صاحبان سهام کاهش می‌یابد.",
+                  "هیچ تغییری در بازده حقوق صاحبان سهام ایجاد نمی‌شود.",
+                  "ریسک حذف شده و بازده ثابت می‌ماند."
+                ],
+                correctIndex: 0,
+                explanation: "اهرم مالی شمشیر دولبه است؛ چون بازده پورتفو (15%) بیشتر از هزینه استقراض (5%) است، با افزایش اهرم، بازده حقوق صاحبان سهام بیشتر می‌شود."
+              }
+            ]
+          },
+          {
+            id: "cfa1-quant-l1",
+            title: "ارزش زمانی پول",
+            titleEn: "Time Value of Money",
+            duration: 18,
+            status: "free",
+            termEn: [
+              { fa: "ارزش آتی", en: "Future Value (FV)" },
+              { fa: "ارزش فعلی", en: "Present Value (PV)" }
+            ],
+            theory: [
+              "ارزش زمانی پول (TVM) یکی از بنیادی‌ترین مفاهیم در مالی است. ایده اصلی این است که یک دلار امروز ارزش بیشتری از یک دلار در آینده دارد."
+            ],
+            formulas: [
+              {
+                label: "ارزش آینده (بهره مرکب)",
+                latex: "FV = PV \\times (1 + r)^n",
+                vars: [
+                  { symbol: "FV", desc: "ارزش آینده پول" },
+                  { symbol: "PV", desc: "ارزش فعلی پول" },
+                  { symbol: "r", desc: "نرخ بهره دوره" },
+                  { symbol: "n", desc: "تعداد دوره‌های زمانی" }
+                ]
+              }
+            ],
+            quiz: [
+              {
+                id: "q1",
+                question: "اگر نرخ بهره سالانه ۱۰٪ باشد، ارزش فعلی ۱۰۰۰ دلار که قرار است پس از ۲ سال دریافت شود چقدر است؟",
+                options: ["۸۲۶.۴۵ دلار", "۸۰۰.۰۰ دلار", "۹۰۰.۰۰ دلار", "۸۵۰.۰۰ دلار"],
+                correctIndex: 0,
+                explanation: "PV = 1000 / (1 + 0.10)^2 = 1000 / 1.21 = 826.45"
               }
             ]
           }
