@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { courses, categoryLabels, CourseCategory, Lesson, Course, Module } from '../data/courses';
+import { courses, categoryLabels, CourseCategory, Lesson, Course } from '../data/courses';
 import { MathBlock } from '../components/Math';
 import { AITutor } from '../components/AITutor';
 
-export const CoursesTab: React.FC = () => {
+export const Courses: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CourseCategory | "ALL">("ALL");
   const [activeCourse, setActiveCourse] = useState<Course | null>(null);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<Record<string, number>>({});
-  const [showExplanation, setShowExplanation] = useState<Record<string, boolean>>({});
 
   const filteredCourses = selectedCategory === "ALL" 
     ? courses 
@@ -18,11 +17,7 @@ export const CoursesTab: React.FC = () => {
     setSelectedAnswer(prev => ({ ...prev, [quizId]: optionIndex }));
   };
 
-  const toggleExplanation = (quizId: string) => {
-    setShowExplanation(prev => ({ ...prev, [quizId]: !prev.explanation }));
-  };
-
-  // اگر در صفحه جزئیات درس باشیم
+  // نمای تفصیلی درس
   if (activeLesson) {
     return (
       <div className="pb-24 max-w-4xl mx-auto px-4 py-6 text-slate-100 dir-rtl text-right">
@@ -76,29 +71,30 @@ export const CoursesTab: React.FC = () => {
           ))}
         </div>
 
-        {/* فرمول‌ها همراه با توضیحات متغیرها */}
+        {/* فرمول‌ها همراه با راهنمای متغیرها */}
         {activeLesson.formulas && activeLesson.formulas.length > 0 && (
           <div className="space-y-6 mb-8">
             <h3 className="text-lg font-bold text-white border-r-4 border-emerald-500 pr-3">فرمول‌های کلیدی و محاسباتی</h3>
             {activeLesson.formulas.map((formula, idx) => (
               <div key={idx} className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-lg">
-                <div className="text-sm font-semibold text-emerald-400 mb-4">{formula.label}</div>
+                <div className="text-sm font-semibold text-emerald-400 mb-3">{formula.label}</div>
                 <div className="bg-slate-950/80 p-4 rounded-xl border border-slate-800/80 text-center my-3 overflow-x-auto">
-                  <MathBlock formula={formula.latex} />
+                  <MathBlock>{formula.latex}</MathBlock>
                 </div>
                 
-                {/* باکس راهنمای متغیرها */}
+                {/* راهنمای متغیرها زیر فرمول */}
                 {formula.vars && formula.vars.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-slate-800/80 bg-slate-950/40 p-4 rounded-xl">
-                    <div className="text-xs font-bold text-slate-300 mb-2 flex items-center gap-1.5">
+                  <div className="mt-4 pt-3 border-t border-slate-800/90 bg-slate-950/50 p-3.5 rounded-xl">
+                    <div className="text-xs font-bold text-slate-300 mb-2.5 flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                       راهنمای متغیرها و نمادها:
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {formula.vars.map((v, vIdx) => (
-                        <div key={vIdx} className="flex items-start gap-2 text-xs bg-slate-900/60 p-2 rounded border border-slate-800/50">
-                          <span className="font-mono text-emerald-300 font-bold dir-ltr shrink-0 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">{v.symbol}</span>
-                          <span className="text-slate-400 leading-tight">{v.desc}</span>
+                        <div key={vIdx} className="flex items-center gap-2 text-xs bg-slate-900/80 px-2.5 py-1.5 rounded border border-slate-800/60">
+                          <span className="font-mono text-emerald-300 font-bold dir-ltr bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">{v.symbol}</span>
+                          <span className="text-slate-500">:</span>
+                          <span className="text-slate-300">{v.desc}</span>
                         </div>
                       ))}
                     </div>
@@ -115,10 +111,10 @@ export const CoursesTab: React.FC = () => {
             <h3 className="text-lg font-bold text-emerald-400 mb-3">💡 {activeLesson.example.title}</h3>
             <p className="text-sm text-slate-300 mb-4">{activeLesson.example.body}</p>
             {activeLesson.example.steps && (
-              <div className="space-y-2 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
+              <div className="space-y-3 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
                 {activeLesson.example.steps.map((step, sIdx) => (
-                  <div key={sIdx} className="text-xs font-mono text-slate-300 dir-ltr text-right py-1 border-b border-slate-900 last:border-none">
-                    {step}
+                  <div key={sIdx} className="overflow-x-auto py-1">
+                    <MathBlock>{step}</MathBlock>
                   </div>
                 ))}
               </div>
@@ -126,7 +122,7 @@ export const CoursesTab: React.FC = () => {
           </div>
         )}
 
-        {/* آزمون خودسنجی (MCQ) */}
+        {/* آزمون خودسنجی استاندارد CFA */}
         {activeLesson.quiz && activeLesson.quiz.length > 0 && (
           <div className="space-y-6">
             <h3 className="text-lg font-bold text-white border-r-4 border-emerald-500 pr-3">آزمون خودسنجی استاندارد CFA</h3>
@@ -194,7 +190,7 @@ export const CoursesTab: React.FC = () => {
     );
   }
 
-  // صفحه فهرست دوره‌ها
+  // نمای فهرست دوره‌ها
   return (
     <div className="pb-24 max-w-6xl mx-auto px-4 py-6 text-slate-100 dir-rtl text-right">
       <div className="mb-8">
@@ -271,3 +267,5 @@ export const CoursesTab: React.FC = () => {
     </div>
   );
 };
+
+export default Courses;
