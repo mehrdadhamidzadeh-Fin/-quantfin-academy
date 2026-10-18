@@ -75,7 +75,7 @@ export const courses: Course[] = [
             id: "cfa1-quant-l0-returns",
             title: "بازده دارایی‌ها و ابزارهای مالی",
             titleEn: "Returns of Financial Assets and Instruments",
-            duration: 60,
+            duration: 75,
             status: "free",
             termEn: [
               { fa: "بازده کل", en: "Total Return" },
@@ -139,11 +139,15 @@ export const courses: Course[] = [
               }
             ],
             example: {
-              title: "مثال جامع تحلیل عملکرد و تله میانگین حسابی",
-              body: "فرض کنید شما سبدی به ارزش ۱۰۰ میلیون تومان خریداری می‌کنید. در سال اول بازار صعودی شدید است و سبد شما ۱۰۰٪ سود می‌کند (ارزش سبد ۲۰۰ میلیون تومان می‌شود). در سال دوم بازار دچار بحران شده و سبد ۵۰٪ زیان ثبت می‌کند (ارزش سبد دوباره ۱۰۰ میلیون تومان می‌شود).",
+              title: "مجموعه مثال‌های جامع تحلیل بازده (مطابق استانداردهای کتاب CFA)",
+              body: "برای تسلط کامل بر مفاهیم این فصل، ۳ سناریوی کلیدی مالی به صورت گام‌به‌گام بررسی می‌شود:",
               steps: [
-                "\\text{1. Arithmetic Mean:} \\quad \\bar{R}_A = \\frac{+100\\% + (-50\\%)}{2} = +25\\%",
-                "\\text{2. Geometric Mean:} \\quad R_G = \\sqrt{(1 + 1.00) \\times (1 - 0.50)} - 1 = \\sqrt{2 \\times 0.5} - 1 = 0\\%"
+                "\\text{Scenario 1 (Total Return):} \\quad P_0 = 60\\$, \\ P_1 = 72\\$, \\ D_1 = 3\\$ \\implies R = \\frac{72 - 60 + 3}{60} = \\frac{15}{60} = +25.0\\%",
+                "\\text{Scenario 2 (Arithmetic vs Geometric Trap):} \\quad R_1 = +100\\%, \\ R_2 = -50\\%",
+                "\\bar{R}_A = \\frac{100\\% + (-50\\%)}{2} = +25.0\\% \\quad (\\text{Arithmetic Mean})",
+                "R_G = \\sqrt{(1 + 1.00)(1 - 0.50)} - 1 = \\sqrt{1} - 1 = 0.0\\% \\quad (\\text{Geometric Mean})",
+                "\\text{Scenario 3 (Fisher Inflation Adjust):} \\quad R_{\\text{nom}} = 12\\%, \\ \\pi = 4\\%",
+                "R_{\\text{real}} = \\frac{1 + 0.12}{1 + 0.04} - 1 = \\frac{1.12}{1.04} - 1 \\approx +7.69\\%"
               ]
             },
             quiz: [
